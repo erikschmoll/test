@@ -41,6 +41,7 @@ app.listen(process.env.PORT || 8080);
 var express = require('express');
 var app = express();
 var path = require('path');
+var argPort = undefined;
 
 app.use(express.static(path.join(__dirname, '/dist')));
 
@@ -50,7 +51,12 @@ app.get('/*', function(req, res) {
 sendFile(path.join(__dirname + '/dist/index.html'));
 });
 
-app.listen(8080, function () {
+if(process.argv.length > 3 && process.argv[2]=='-p'){
+  argPort = process.argv[3];
+}
+var p = argPort || process.env.PORT
+console.info(p)
+app.listen(p, function () {
   console.log('App started');
 });
 
