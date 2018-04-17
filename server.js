@@ -1,3 +1,4 @@
+/*
 // server.js
 const path = require('path');
 const express = require('express');
@@ -30,7 +31,27 @@ app.get('/*', function(req, res) {
 
 // Run the app by serving the static files
 // in the dist directory
-app.use(express.static(__dirname + '/dist'));
+//app.use(express.static(__dirname + '/dist'));
 // Start the app by listening on the default
 // Heroku port
+app.use(express.static('public'));
 app.listen(process.env.PORT || 8080);
+*/
+
+var express = require('express');
+var app = express();
+var path = require('path');
+
+app.use(express.static(path.join(__dirname, '/dist')));
+
+app.get('/*', function(req, res) {
+  res.
+
+sendFile(path.join(__dirname + '/dist/index.html'));
+});
+
+app.listen(8080, function () {
+  console.log('App started');
+});
+
+
